@@ -1,0 +1,124 @@
+[gd_scene load_steps=18 format=3 uid="uid://c0a27yljw3y04"]
+
+[ext_resource type="Script" uid="uid://bm3sr1a1d6wgt" path="res://enemy_orc_easy.gd" id="1_pclk0"]
+[ext_resource type="Texture2D" uid="uid://c7wfeen6wsql0" path="res://Assets/characters/Orc_Big.png" id="1_w6u8l"]
+[ext_resource type="Script" uid="uid://dclcguoeiqk4e" path="res://hit_box.gd" id="3_52i1f"]
+[ext_resource type="Script" uid="uid://cdgklmaewmlql" path="res://hurt_box.gd" id="4_sjneb"]
+[ext_resource type="Script" uid="uid://xmfsraw2ta18" path="res://health.gd" id="5_4rg1s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pclk0"]
+atlas = ExtResource("1_w6u8l")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52i1f"]
+atlas = ExtResource("1_w6u8l")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjneb"]
+atlas = ExtResource("1_w6u8l")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rg1s"]
+atlas = ExtResource("1_w6u8l")
+region = Rect2(192, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dr1hw"]
+atlas = ExtResource("1_w6u8l")
+region = Rect2(256, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xl4b"]
+atlas = ExtResource("1_w6u8l")
+region = Rect2(320, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqs3o"]
+atlas = ExtResource("1_w6u8l")
+region = Rect2(384, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3hqo"]
+atlas = ExtResource("1_w6u8l")
+region = Rect2(448, 0, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c58qj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pclk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52i1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjneb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rg1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dr1hw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xl4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqs3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3hqo")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mmhdh"]
+radius = 9.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pclk0"]
+radius = 15.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4rg1s"]
+
+[node name="enemy_orc_easy" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_pclk0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_c58qj")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.622667
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_mmhdh")
+
+[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("3_52i1f")
+damage = 2
+health = NodePath("../Health")
+crit_chance = 0.3
+bleeding_damage = 2
+burning_damage = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_pclk0")
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("4_sjneb")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_4rg1s")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("5_4rg1s")
+max_health = 3000
+metadata/_custom_type_script = "uid://bfb8dbpxhaen7"

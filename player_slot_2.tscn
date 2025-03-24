@@ -1,0 +1,121 @@
+[gd_scene load_steps=18 format=3 uid="uid://b5jcsqqoovv8a"]
+
+[ext_resource type="Script" uid="uid://brpolecguriqk" path="res://player_slot_2.gd" id="1_rp6e2"]
+[ext_resource type="Texture2D" uid="uid://b868fc5fo36ny" path="res://Assets/characters/cute_boy/png/Run (4).png" id="2_ri2su"]
+[ext_resource type="Texture2D" uid="uid://c81t5fhlysicb" path="res://Assets/characters/cute_boy/png/Run (1).png" id="3_53pmp"]
+[ext_resource type="Texture2D" uid="uid://condwh2gut5m3" path="res://Assets/characters/cute_boy/png/Run (2).png" id="4_yc65f"]
+[ext_resource type="Texture2D" uid="uid://c6niw4e5gvomc" path="res://Assets/characters/cute_boy/png/Run (3).png" id="5_puspo"]
+[ext_resource type="Texture2D" uid="uid://vby6gbw8utbw" path="res://Assets/characters/cute_boy/png/Run (5).png" id="6_hkx54"]
+[ext_resource type="Texture2D" uid="uid://cjyil5wi7yq8g" path="res://Assets/characters/cute_boy/png/Run (6).png" id="7_r2iyd"]
+[ext_resource type="Texture2D" uid="uid://nwrp7q54mrso" path="res://Assets/characters/cute_boy/png/Run (7).png" id="8_wt5u5"]
+[ext_resource type="Texture2D" uid="uid://b02hb1wckbqkw" path="res://Assets/characters/cute_boy/png/Run (8).png" id="9_a2s7p"]
+[ext_resource type="Script" uid="uid://dclcguoeiqk4e" path="res://hit_box.gd" id="11_ri2su"]
+[ext_resource type="Script" uid="uid://cdgklmaewmlql" path="res://hurt_box.gd" id="11_rp6e2"]
+[ext_resource type="Script" uid="uid://xmfsraw2ta18" path="res://health.gd" id="12_ri2su"]
+[ext_resource type="PackedScene" uid="uid://bogn5h86nrc88" path="res://player_slot.tscn" id="13_53pmp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_op7ga"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_53pmp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yc65f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_puspo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ri2su")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_hkx54")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_r2iyd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_wt5u5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_a2s7p")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_53pmp"]
+radius = 15.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ri2su"]
+
+[node name="player_slot_2" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_rp6e2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_onrkg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-3.29, 0)
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("2_ri2su")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3, 0)
+scale = Vector2(0.06, 0.06)
+sprite_frames = SubResource("SpriteFrames_op7ga")
+animation = &"walk"
+autoplay = "walk"
+frame = 2
+frame_progress = 0.92721
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("11_ri2su")
+damage = 22
+crit_chance = 0.4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_53pmp")
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("11_rp6e2")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_ri2su")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("12_ri2su")
+player_slot_scene = ExtResource("13_53pmp")
+max_health = 2000
+
+[node name="Name" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.0
+offset_top = -41.0
+offset_right = 22.0
+offset_bottom = -18.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 15
+text = "adasd"
+horizontal_alignment = 1

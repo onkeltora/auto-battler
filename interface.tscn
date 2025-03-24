@@ -1,0 +1,109 @@
+[gd_scene load_steps=6 format=3 uid="uid://hn68rg517pvj"]
+
+[ext_resource type="Script" uid="uid://qxsumli1atad" path="res://interface_low.gd" id="1_4rbkc"]
+[ext_resource type="Texture2D" uid="uid://dxqk1qkxdpohg" path="res://Assets/Interface/Free SciFi Inventory/Inventory Boxes/scifi_inventory01.png" id="1_rh14k"]
+[ext_resource type="Texture2D" uid="uid://csbo06wcmacw2" path="res://Assets/Interface/wooden-ui/Wooden_UI_png/frame_s_05.png" id="2_kyn48"]
+[ext_resource type="Texture2D" uid="uid://ce8tse6t6kvda" path="res://Assets/Interface/wooden-ui/Wooden_UI_png/bg_01_02.png" id="2_oi7g3"]
+[ext_resource type="PackedScene" uid="uid://bogn5h86nrc88" path="res://player_slot.tscn" id="5_pt1ru"]
+
+[node name="interface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4rbkc")
+player_slot_scene = ExtResource("5_pt1ru")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -351.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_rh14k")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -400.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_oi7g3")
+patch_margin_left = 24
+patch_margin_top = 17
+patch_margin_right = 24
+patch_margin_bottom = 17
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -400.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_kyn48")
+patch_margin_left = 24
+patch_margin_top = 17
+patch_margin_right = 24
+patch_margin_bottom = 17
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/NinePatchRect"]
+layout_mode = 2
+offset_right = 1280.0
+offset_bottom = 400.0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/NinePatchRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/NinePatchRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="spacer_left" type="PanelContainer" parent="CanvasLayer/NinePatchRect/MarginContainer/HBoxContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/NinePatchRect/MarginContainer/HBoxContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SlotContainer" type="VBoxContainer" parent="CanvasLayer/NinePatchRect/MarginContainer/HBoxContainer/HBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 11
+
+[node name="spacer_right" type="PanelContainer" parent="CanvasLayer/NinePatchRect/MarginContainer/HBoxContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/NinePatchRect/MarginContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer3" type="PanelContainer" parent="CanvasLayer/NinePatchRect/MarginContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3

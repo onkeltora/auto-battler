@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://bogn5h86nrc88"]
+
+[ext_resource type="Texture2D" uid="uid://b10djdoqmwbs3" path="res://Assets/Interface/wooden-ui/Wooden_UI_png/Plank_04.png" id="1_43da5"]
+[ext_resource type="Script" uid="uid://bbdc8v808suj7" path="res://player_slot.gd" id="1_lh51v"]
+
+[node name="player_slot" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_lh51v")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(300, 61)
+layout_mode = 2
+texture = ExtResource("1_43da5")
+
+[node name="Slot_1" type="PanelContainer" parent="NinePatchRect"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/Slot_1"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/Slot_1/MarginContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="NinePatchRect/Slot_1/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Charactername" type="Label" parent="NinePatchRect/Slot_1/MarginContainer/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+
+[node name="LifeBar" type="ProgressBar" parent="NinePatchRect/Slot_1/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 10000.0

@@ -1,0 +1,133 @@
+[gd_scene load_steps=19 format=3 uid="uid://dpjg8wgrtpblc"]
+
+[ext_resource type="Texture2D" uid="uid://b868fc5fo36ny" path="res://Assets/characters/cute_boy/png/Run (4).png" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://cbnh44sjupngx" path="res://player_slot_1.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://ege0jot83oh" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://c81t5fhlysicb" path="res://Assets/characters/cute_boy/png/Run (1).png" id="3_n7ghd"]
+[ext_resource type="Texture2D" uid="uid://condwh2gut5m3" path="res://Assets/characters/cute_boy/png/Run (2).png" id="4_nvl01"]
+[ext_resource type="Texture2D" uid="uid://c6niw4e5gvomc" path="res://Assets/characters/cute_boy/png/Run (3).png" id="5_ivps1"]
+[ext_resource type="Texture2D" uid="uid://vby6gbw8utbw" path="res://Assets/characters/cute_boy/png/Run (5).png" id="6_urp6f"]
+[ext_resource type="Texture2D" uid="uid://cjyil5wi7yq8g" path="res://Assets/characters/cute_boy/png/Run (6).png" id="7_bwjto"]
+[ext_resource type="Texture2D" uid="uid://nwrp7q54mrso" path="res://Assets/characters/cute_boy/png/Run (7).png" id="8_606se"]
+[ext_resource type="Texture2D" uid="uid://b02hb1wckbqkw" path="res://Assets/characters/cute_boy/png/Run (8).png" id="9_u1c27"]
+[ext_resource type="Script" uid="uid://cdgklmaewmlql" path="res://hurt_box.gd" id="12_cbq0x"]
+[ext_resource type="Script" uid="uid://xmfsraw2ta18" path="res://health.gd" id="13_m87tb"]
+[ext_resource type="Script" uid="uid://dclcguoeiqk4e" path="res://hit_box.gd" id="13_x2xdb"]
+[ext_resource type="PackedScene" uid="uid://bogn5h86nrc88" path="res://player_slot.tscn" id="14_m87tb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
+radius = 8.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_op7ga"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_n7ghd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nvl01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ivps1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_4flbx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_urp6f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bwjto")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_606se")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_u1c27")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m87tb"]
+radius = 15.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kk0qb"]
+
+[node name="player_slot_1" type="CharacterBody2D"]
+script = ExtResource("1_onrkg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_onrkg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-3.29, 0)
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("1_4flbx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3, 0)
+scale = Vector2(0.06, 0.06)
+sprite_frames = SubResource("SpriteFrames_op7ga")
+animation = &"walk"
+autoplay = "walk"
+frame = 2
+frame_progress = 0.92721
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("3_i3pqv")
+metadata/_custom_type_script = "uid://ege0jot83oh"
+
+[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("13_x2xdb")
+damage = 22
+health = NodePath("../Health")
+crit_chance = 0.3
+bleeding_chance = 0.4
+bleeding_damage = 8
+burning_chance = 0.4
+burning_damage = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_m87tb")
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("12_cbq0x")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_kk0qb")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("13_m87tb")
+player_slot_scene = ExtResource("14_m87tb")
+max_health = 1500
+metadata/_custom_type_script = "uid://bfb8dbpxhaen7"
+
+[node name="Name" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.0
+offset_top = -41.0
+offset_right = 22.0
+offset_bottom = -18.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 15
+text = "adasd"
+horizontal_alignment = 1
