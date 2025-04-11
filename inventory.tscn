@@ -1,0 +1,17 @@
+[gd_scene load_steps=9 format=3 uid="uid://b2gumb12e41o8"]
+
+[ext_resource type="Script" uid="uid://kebkj020821f" path="res://inventory.gd" id="1_pohso"]
+[ext_resource type="PackedScene" uid="uid://sim6utj1tic" path="res://inventory_slot.tscn" id="2_ormsd"]
+[ext_resource type="Texture2D" uid="uid://cclecbvfexqrj" path="res://Assets/Textures/InventoryIcons/Armor/transparent/armor/armor_1.png" id="3_ho8i8"]
+[ext_resource type="Texture2D" uid="uid://bu8ope5i2xgw" path="res://Assets/Textures/InventoryIcons/Armor/transparent/armor/armor_2.png" id="4_udyo3"]
+[ext_resource type="Texture2D" uid="uid://ub8cgbuhjmv1" path="res://Assets/Textures/InventoryIcons/Armor/transparent/armor/armor_3.png" id="5_a8ig1"]
+[ext_resource type="Texture2D" uid="uid://b1lc8btlmnuph" path="res://Assets/Textures/InventoryIcons/Armor/transparent/armor/armor_4.png" id="6_2pjyi"]
+[ext_resource type="Texture2D" uid="uid://dqo6nhxobieti" path="res://Assets/Textures/InventoryIcons/Armor/transparent/armor/armor_5.PNG" id="7_dhhmk"]
+[ext_resource type="Texture2D" uid="uid://c31xs6qx61vea" path="res://Assets/Textures/InventoryIcons/Armor/transparent/armor/armor_6.PNG" id="8_4epum"]
+
+[node name="Inventory" type="GridContainer"]
+columns = 8
+script = ExtResource("1_pohso")
+slot_scene = ExtResource("2_ormsd")
+num_slots = 32
+item_textures = Array[Texture2D]([ExtResource("3_ho8i8"), ExtResource("4_udyo3"), ExtResource("5_a8ig1"), ExtResource("6_2pjyi"), ExtResource("7_dhhmk"), ExtResource("8_4epum")])

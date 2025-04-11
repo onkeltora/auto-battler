@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://njhj3wdkkem8"]
+
+[ext_resource type="Script" uid="uid://dlar210twfa5q" path="res://item_display.gd" id="1_x8nve"]
+
+[node name="ItemDisplay" type="TextureRect"]
+scale = Vector2(0.75, 0.75)
+expand_mode = 1
+script = ExtResource("1_x8nve")
